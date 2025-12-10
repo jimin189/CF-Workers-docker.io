@@ -7,6 +7,25 @@ const auth_url = 'https://auth.docker.io';
 
 let 屏蔽爬虫UA = ['netcraft'];
 
+// Worker 示例代码
+addEventListener("fetch", (event) => {
+  event.respondWith(handleRequest(event.request));
+});
+
+async function handleRequest(request) {
+  const dockerUrl = "https://registry-1.docker.io" + new URL(request.url).pathname;
+  const authToken = "jimin189 dckr_pat_06cMWG28qcwaMx0SYg-g7abqBeU"; // 替换为你的令牌
+
+  const headers = new Headers(request.headers);
+  headers.set("Authorization", authToken);
+
+  const response = await fetch(dockerUrl, {
+    headers,
+    method: request.method,
+  });
+  return response;
+}
+
 // 根据主机名选择对应的上游地址
 function routeByHosts(host) {
 	// 定义路由表
