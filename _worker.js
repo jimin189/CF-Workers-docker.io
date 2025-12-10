@@ -7,6 +7,19 @@ const auth_url = 'https://auth.docker.io';
 
 let 屏蔽爬虫UA = ['netcraft'];
 
+async function fetchWithRetry(url, options, retries = 3) {
+  try {
+    return await fetch(url, options);
+  } catch (err) {
+    if (retries > 0) {
+      await new Promise(resolve => setTimeout(resolve, 2000)); // 等待 2 秒后重试
+      return fetchWithRetry(url, options, retries - 1);
+    }
+    throw err;
+  }
+}
+
+
 // Worker 示例代码
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
