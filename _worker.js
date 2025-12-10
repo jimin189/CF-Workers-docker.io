@@ -14,7 +14,7 @@ addEventListener("fetch", (event) => {
 
 async function handleRequest(request) {
   const dockerUrl = "https://registry-1.docker.io" + new URL(request.url).pathname;
-  const authToken = "dckr_pat_06cMWG28qcwaMx0SYg-g7abqBeU"; // 替换为你的令牌
+  const authToken = "jimin189 dckr_pat_06cMWG28qcwaMx0SYg-g7abqBeU"; // 替换为你的令牌
 
   const headers = new Headers(request.headers);
   headers.set("Authorization", authToken);
